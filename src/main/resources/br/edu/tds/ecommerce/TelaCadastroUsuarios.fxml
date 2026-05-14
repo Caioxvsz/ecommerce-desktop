@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FF0000;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.tds.ecommerce.TelaCadastroUsuarioController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane layoutY="-2.0" prefHeight="408.0" prefWidth="314.0" style="-fx-background-color: FFFFFF;">
+         <children>
+            <TextField fx:id="txtEmail" layoutX="84.0" layoutY="269.0" promptText="E-mail " style="-fx-background-color: transparent; -fx-border-color: #FF0000; -fx-border-width: 0 0 3 0;" />
+            <TextField fx:id="txtCpf" layoutX="84.0" layoutY="316.0" promptText="CPF" style="-fx-background-color: transparent; -fx-border-color: #FF0000; -fx-border-width: 0 0 3 0;" />
+            <FontIcon iconColor="WHITE" iconLiteral="fas-user-alt" iconSize="50" layoutX="132.0" layoutY="73.0" text="" />
+            <Text fx:id="lblTelaEditarUsuario" fill="RED" layoutX="113.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnCadastrar" layoutX="113.0" layoutY="363.0" mnemonicParsing="false" onAction="#cadastrarUsuario" style="-fx-background-color: FF0000;" text="Cadastrar" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <FontIcon iconColor="RED" iconLiteral="fas-lock" iconSize="15" layoutX="58.0" layoutY="244.0" text="" />
+            <FontIcon iconColor="RED" iconLiteral="fas-envelope-open" iconSize="15" layoutX="57.0" layoutY="289.0" text="" />
+            <FontIcon iconColor="RED" iconLiteral="fas-sign-in-alt" iconSize="15" layoutX="57.0" layoutY="209.0" />
+            <FontIcon iconColor="RED" iconLiteral="fas-shield-alt" iconSize="15" layoutX="57.0" layoutY="344.0" />
+            <FontIcon iconColor="RED" iconLiteral="fas-chevron-left" iconSize="20" layoutX="14.0" layoutY="32.0" onMouseClicked="#abrirTelaLogin" />
+            <Text fill="RED" layoutX="40.0" layoutY="30.0" onMouseClicked="#abrirTelaLogin" strokeType="OUTSIDE" strokeWidth="0.0" text="Sair">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtUsuario" layoutX="84.0" layoutY="180.0" promptText="Nome de Usuário" style="-fx-background-color: transparent; -fx-border-color: #FF0000; -fx-border-width: 0 0 3 0;" />
+            <Label fx:id="lblUsuario" layoutX="75.0" layoutY="148.0" textFill="RED" />
+            <Label fx:id="lblSenha" layoutX="75.0" layoutY="195.0" textFill="RED" />
+            <Label fx:id="lblEmail" layoutX="75.0" layoutY="251.0" textFill="RED" />
+            <Label fx:id="lblCpf" layoutX="75.0" layoutY="301.0" textFill="RED" />
+            <TextField fx:id="txtNomeCompleto" layoutX="84.0" layoutY="134.0" promptText="Nome Completo" style="-fx-background-color: transparent; -fx-border-color: #FF0000; -fx-border-width: 0 0 3 0;" />
+            <PasswordField fx:id="txtSenha" layoutX="77.0" layoutY="233.0" />
+         </children>
+      </AnchorPane>
+      <FontIcon iconColor="RED" iconLiteral="fab-playstation" iconSize="20" layoutX="539.0" layoutY="63.0" />
+      <FontIcon iconColor="RED" iconLiteral="fab-rebel" iconSize="20" layoutX="352.0" layoutY="353.0" text="" />
+   </children>
+</AnchorPane>
