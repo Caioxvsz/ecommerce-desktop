@@ -6,14 +6,21 @@ package br.edu.tds.ecommerce;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
+/**
+ *
+ * @author douglas
+ */
 public class Conexao {
-
-   private static final String URL = "jdbc:mysql://localhost:3306/tela_login";
-   private static final String USER = "root";
-   private static final String PASSWORD = "ifsuldeminas";
-
-   public static Connection conectar() throws Exception {
-       return DriverManager.getConnection(URL, USER, PASSWORD);
-   }
+    
+    private static final String URL = "jdbc:mysql://localhost:3306/ecommerce";
+    private static final String USER = "root";
+    private static final String PASSWORD = "ifsuldeminas";
+    
+    public static Connection conectar() throws SQLException{
+        return DriverManager.getConnection(URL,USER,PASSWORD);
+    }
+    
+    
 }
