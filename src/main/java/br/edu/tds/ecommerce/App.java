@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.stage.StageStyle;
 
 /**
  * JavaFX App
@@ -14,10 +15,13 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-
+    
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("TelaCadastroProduto"), 700, 500);
+        scene = new Scene(loadFXML("telaGerenciamentoUsuarios"), 700, 500);
+        //Tirar as bordas da tela
+        //stage.initStyle(StageStyle.DECORATED.UNDECORATED);
+        
         stage.setScene(scene);
         stage.show();
     }

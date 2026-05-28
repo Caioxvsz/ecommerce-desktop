@@ -6,27 +6,28 @@ package br.edu.tds.ecommerce;
 
 /**
  *
- * @author aluno
+ * @author douglas
  */
 public class Usuario {
 
     private int id;
-    private String cpf;
     private String nomeCompleto;
     private String nomeUsuario;
     private String email;
     private String senha;
+    private String cpf;
+    private String role;
 
-    public Usuario(String nomeCompleto, String nomeUsuario, String email, String senha, String cpf) {
+    public Usuario() {
+    }
+
+    public Usuario(String nomeCompleto, String nomeUsuario, String email, String senha, String cpf, String role) {
         this.nomeCompleto = nomeCompleto;
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.senha = senha;
         this.cpf = cpf;
-    }
-
-    Usuario() {
-
+        this.role = role;
     }
 
     public int getId() {
@@ -35,14 +36,6 @@ public class Usuario {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getNomeCompleto() {
@@ -77,5 +70,19 @@ public class Usuario {
         this.senha = senha;
     }
 
-   
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

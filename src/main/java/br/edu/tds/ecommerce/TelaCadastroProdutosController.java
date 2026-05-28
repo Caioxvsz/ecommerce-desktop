@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -40,6 +41,11 @@ public class TelaCadastroProdutosController implements Initializable {
     
     @FXML
     private TextArea txtDescricao;
+    
+    @FXML
+    private CheckBox cAtivo;
+    
+    private Produto produtoEdicao;
     
     /**
      * Initializes the controller class.
@@ -109,6 +115,7 @@ public class TelaCadastroProdutosController implements Initializable {
             p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
             p.setImagem(txtImagem.getText());
             p.setDescricao(txtDescricao.getText());
+            p.setAtivo(cAtivo.isSelected());
             
             ProdutoDAO dao = new ProdutoDAO();
             dao.cadastrarProduto(p);
@@ -118,6 +125,18 @@ public class TelaCadastroProdutosController implements Initializable {
             //corrigir informações do formulário
             mostrarAlerta("Todos os campos são obrigatórios");
         }
+    }
+    
+    public void setProduto(Produto p){
+        produtoEdicao = p;
+        
+        txtNome.setText(produtoEdicao.getNome());
+        cbCategoria.setValue(produtoEdicao.getCategoria());
+        txtPreco.setText(String.valueOf(produtoEdicao.getPreco()));
+        txtQuantidade.setText(String.valueOf(produtoEdicao.getQuantidade()));
+        txtImagem.setText(produtoEdicao.getImagem());
+        txtDescricao.setText(produtoEdicao.getDescricao());
+        cAtivo.setSelected(produtoEdicao.isAtivo());
     }
     
     private void mostrarAlerta(String msg) {

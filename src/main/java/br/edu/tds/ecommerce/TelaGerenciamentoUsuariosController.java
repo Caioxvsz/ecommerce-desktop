@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
@@ -39,7 +38,7 @@ public class TelaGerenciamentoUsuariosController implements Initializable {
     private TableColumn<Usuario, String> colNomeCompleto;
 
     @FXML
-    private TableColumn<Usuario, String> colNomeUsuario;
+    private TableColumn<Usuario, String> colUsuario;
 
     @FXML
     private TableColumn<Usuario, String> colEmail;
@@ -52,10 +51,10 @@ public class TelaGerenciamentoUsuariosController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // TODO
-        colNomeCompleto.setCellValueFactory(new PropertyValueFactory<>("NomeCompleto"));
-        colNomeUsuario.setCellValueFactory(new PropertyValueFactory<>("NomeUsuario"));
+
+        colNomeCompleto.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
+        colUsuario.setCellValueFactory(new PropertyValueFactory<>("nomeUsuario"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
@@ -64,15 +63,11 @@ public class TelaGerenciamentoUsuariosController implements Initializable {
 
     @FXML
     private void abrirTelaCadastroUsuario() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/tds/ecommerce/TelaCadastroUsuarios.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/tds/ecommerce/telaCadastroUsuario.fxml"));
 
         Parent root = loader.load();
 
         TelaCadastroUsuarioController controller = loader.getController();
-
-        // Envia os dados da tela gerenciamento de Usuarios
-        //para o controlador de Cadastro de Usuarios
-        
 
         //Trocando de tela
         Stage stage = (Stage) tabelaUsuarios.getScene().getWindow();
@@ -83,33 +78,32 @@ public class TelaGerenciamentoUsuariosController implements Initializable {
 
         ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM usuario";
+        String sql = "SELECT * FROM usuarios";
         try (Connection conn = Conexao.conectar()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setNomeCompleto(rs.getString("nome"));
-                u.setNomeUsuario(rs.getString("usuario"));
+                u.setNomeCompleto(rs.getString("nomeCompleto"));
+                u.setNomeUsuario(rs.getString("nomeUsuario"));
                 u.setEmail(rs.getString("email"));
                 u.setCpf(rs.getString("cpf"));
                 u.setSenha(rs.getString("senha"));
+                u.setRole(rs.getString("role"));
 
-                System.out.println("nomeCompleto: " + u.getNomeCompleto());
-                System.out.println("nomeUsuario: " + u.getNomeUsuario());
-                System.out.println("");
                 listaUsuarios.add(u);
             }
+
             tabelaUsuarios.setItems(listaUsuarios);
 
         } catch (Exception e) {
-
         }
     }
 
     @FXML
-    private void excluirUsuario() throws SQLException, Exception {
+    private void excluirUsuario() throws SQLException {
+
         Usuario uSelecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
 
         if (uSelecionado == null) {
@@ -117,9 +111,7 @@ public class TelaGerenciamentoUsuariosController implements Initializable {
             return;
         }
 
-        System.out.println("Usuário: " + uSelecionado.getNomeUsuario());
-
-        String sql = "DELETE FROM usuario WHERE usuario = ?";
+        String sql = "DELETE FROM usuarios WHERE nomeUsuario = ?";
 
         try (Connection conn = Conexao.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -127,26 +119,30 @@ public class TelaGerenciamentoUsuariosController implements Initializable {
             stmt.executeUpdate();
 
             carregarUsuarios();
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @FXML
     private void editarUsuario() throws SQLException {
+
         Usuario uSelecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
 
         if (uSelecionado == null) {
             mostrarAlerta("Selecione um usuário");
             return;
         }
+
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/tds/ecommerce/TelaCadastroUsuarios.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/tds/ecommerce/telaCadastroUsuario.fxml"));
 
             Parent root = loader.load();
 
             TelaCadastroUsuarioController controller = loader.getController();
 
-            // Envia os dados da tela gerenciamento de Usuarios
+            //Envia os dados da tela Gerenciamento de Usuarios
             //para o controlador de Cadastro de Usuarios
             controller.setUsuario(uSelecionado);
 
@@ -157,6 +153,7 @@ public class TelaGerenciamentoUsuariosController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     private void mostrarAlerta(String msg) {
